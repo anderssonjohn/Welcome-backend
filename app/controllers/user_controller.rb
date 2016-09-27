@@ -6,10 +6,10 @@ class UserController < ApplicationController
       last_name: params[:last_name],
       proffesion: params[:proffesion])
     if user.valid?
-      render status: :ok
+      render plain: :ok
       user.save
     else
-      render status: :not_found
+      render plain: :not_found
       puts("ERROR")
     end
   end
