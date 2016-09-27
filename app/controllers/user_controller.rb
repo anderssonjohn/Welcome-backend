@@ -5,7 +5,13 @@ class UserController < ApplicationController
     user = User.create(first_name: params[:first_name],
       last_name: params[:last_name],
       proffesion: params[:proffesion])
-    user.valid? ? user.save : puts("ERROR: INVALID USER")
+    if user.valid?
+      render status: :ok
+      user.save
+    else
+      render status: :not_found
+      puts("ERROR")
+    end
   end
 
   def show
