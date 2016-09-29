@@ -1,23 +1,32 @@
-class UserController < ApplicationController
-  #skip_before_action  :verify_authenticity_token
+class UsersController < ApplicationController
+  before_action :authenticate, only: :show
+
+  def show
+    render :json => @user
+  end
 
   def create
-    user = User.create(first_name: params[:first_name],
-      last_name: params[:last_name],
-      proffesion: params[:proffesion])
+    user = User.new(name: params[:name],
+      profession: params[:profession],
+      swedish_speaker: params[:swedish_speaker],
+      gender: params[:gender],
+      date_of_birth: params[:date],
+      interest: params[:interest])
     if user.valid?
-      render plain: :ok
       user.save
+      render :json => user
     else
-      render plain: :not_found
-      puts("ERROR")
+      render status: 406
     end
   end
 
-  def show
-      user = User.find(params[:id])
+  protected
+  include ActionController::HttpAuthentication::Token::ControllerMethods
 
-      render :json => user
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      @user = User.find_by(auth_token: token)
+    end
   end
 
 end
