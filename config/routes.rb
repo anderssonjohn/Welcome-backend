@@ -3,4 +3,9 @@ Rails.application.routes.draw do
   get 'user' => 'users#show'
 
   post 'user' => 'users#create'
+
+
+  resources :conversations do
+    resources :messages
+  end
 end

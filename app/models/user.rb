@@ -2,6 +2,8 @@ require 'securerandom'
 class User < ApplicationRecord
   before_create :set_auth_token
 
+  has_many :conversations, :foreign_key => :sender_id
+
   private
 
   def set_auth_token
