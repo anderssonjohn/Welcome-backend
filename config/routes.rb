@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   post 'user' => 'users#create'
 
+  get 'match' => 'matching#get_match'
 
   resources :conversations do
     resources :messages
