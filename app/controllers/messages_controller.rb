@@ -4,7 +4,6 @@ class MessagesController < ApplicationController
 
   def create
     @conversation = Conversation.find(params[:conversation_id])
-    # @user comes from authen
     @message = @conversation.messages.build(body: params[:body], user: @user)
 
     @message.save!

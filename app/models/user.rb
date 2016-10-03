@@ -4,6 +4,11 @@ class User < ApplicationRecord
 
   has_many :conversations, :foreign_key => :sender_id
 
+  scope :same_job, -> (user) do
+    where("conversations.sender_id =? OR conversations.recipient_id =?",user.id,user.id)
+  end
+
+
   private
 
   def set_auth_token

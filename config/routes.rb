@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 
   get 'match' => 'matching#get_match'
 
-  resources :conversations do
-    resources :messages
-  end
+  get 'conversations' => 'conversations#get'
+
+  get 'conversations/:id/messages' => 'conversations#get_messages'
+
+  # resources :conversations do
+  #   resources :messages
+  # end
 end
