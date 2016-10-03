@@ -3,17 +3,18 @@ class MatchingController < ApplicationController
 
   def get_match
     # create(@user.id,find_match)
-    render :json => @user
+    create(@user.id, User.find(rand(1..@user.id-1)).id)
+    render :json => @conversation
   end
 
   def create(sender_id, recipient_id)
+    puts sender_id
+    puts recipient_id
     if Conversation.between(sender_id,recipient_id).present?
       @conversation = Conversation.between(sender_id,recipient_id).first
     else
-      @conversation = Conversation.create!(conversation_params)
+      @conversation = Conversation.create!(sender_id: sender_id, recipient_id: recipient_id)
     end
-
-    render json: { conversation_id: @conversation.id }
   end
 
   def show
@@ -25,9 +26,7 @@ class MatchingController < ApplicationController
   end
 
   private
-  def conversation_params
-    params.permit(:sender_id, :recipient_id)
-  end
+
 
   def find_match
     2
