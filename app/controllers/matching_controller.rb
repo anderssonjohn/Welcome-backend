@@ -2,8 +2,8 @@ class MatchingController < ApplicationController
   before_action :authenticate
 
   def get_match
-    create(@user.id,find_match)
-    # render :json => @user
+    # create(@user.id,find_match)
+    render :json => @user
   end
 
   def create(sender_id, recipient_id)
