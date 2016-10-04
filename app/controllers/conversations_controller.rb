@@ -1,9 +1,16 @@
 class ConversationsController < ApplicationController
   before_action :authenticate
 
+
   def get
-    render :json => Conversation.involving(@user)
+    conversation = Conversation.involving(@user)
+    render :json => conversation.to_json(:methods => :name)
   end
+
+  def messages
+    @user.name
+  end
+
 
   def get_messages
     conversation = Conversation.find(params[:id])

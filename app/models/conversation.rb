@@ -4,6 +4,11 @@ class Conversation < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
+  def name
+    user = User.find(self.recipient_id)
+    user.name
+  end
+
   validates_uniqueness_of :sender_id, :scope => :recipient_id
 
   scope :involving, -> (user) do

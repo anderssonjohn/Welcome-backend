@@ -8,7 +8,6 @@ class User < ApplicationRecord
     where("conversations.sender_id =? OR conversations.recipient_id =?",user.id,user.id)
   end
 
-
   private
 
   def set_auth_token
