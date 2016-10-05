@@ -7,13 +7,11 @@ class ConversationsController < ApplicationController
     render :json => conversation.to_json(:methods => :name)
   end
 
-  def messages
-    @user.name
-  end
 
 
   def get_messages
-    conversation = Conversation.find(params[:id])
+    # :id is the id of the recipient
+    conversation = Conversation.between(@user.id, params[:id]).first
     render :json => conversation.messages
   end
 

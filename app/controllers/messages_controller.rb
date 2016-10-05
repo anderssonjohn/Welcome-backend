@@ -3,20 +3,15 @@ class MessagesController < ApplicationController
   before_action :authenticate
 
   def create
-    @conversation = Conversation.find(params[:conversation_id])
-    @message = @conversation.messages.build(body: params[:body], user: @user)
+    conversation = Conversation.between(@user.id, params[:recipient]).first
+    message = conversation.messages.build(body: params[:body], user: @user)
 
-    @message.save!
+    message.save!
 
     render status: 200
-
   end
 
   private
-
-  # def authenticate
-  #   @user = ApplicationController.authenticate
-  # end
 
   # def message_params
   #   params.require(:message).permit(:body)

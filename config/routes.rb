@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
   get 'conversations' => 'conversations#get'
 
+  # :id is the id of the recipient
   get 'conversations/:id/messages' => 'conversations#get_messages'
+
+  post 'messages' => 'messages#create'
 
   # resources :conversations do
   #   resources :messages
