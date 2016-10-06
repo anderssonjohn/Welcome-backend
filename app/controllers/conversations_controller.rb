@@ -4,6 +4,9 @@ class ConversationsController < ApplicationController
 
   def get
     conversation = Conversation.involving(@user)
+    conversation.each do |conv|
+      conv.recipient_id = interlocutor(conv).id
+    end
     render :json => conversation.to_json(:methods => :name)
   end
 
@@ -20,6 +23,6 @@ class ConversationsController < ApplicationController
 
 
   def interlocutor(conversation)
-    @current_user == conversation.recipient ? conversation.sender : conversation.recipient
+    @user == conversation.recipient ? conversation.sender : conversation.recipient
   end
 end
