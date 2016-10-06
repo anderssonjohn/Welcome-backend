@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   def create
     conversation = Conversation.between(@user.id, params[:recipient]).first
-    message = conversation.messages.build(body: params[:body], user: @user)
+    message = conversation.messages.build(body: params[:body], user_id: @user.id)
 
     message.save!
 

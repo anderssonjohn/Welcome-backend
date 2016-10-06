@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :conversations, :foreign_key => :sender_id
 
   scope :different_language, -> (user) do
-    where("users.swedish_speaker ")
+    where("users.swedish_speaker =?",!user.swedish_speaker)
   end
 
   scope :same_job, -> (user) do
