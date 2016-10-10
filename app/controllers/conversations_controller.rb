@@ -10,7 +10,9 @@ class ConversationsController < ApplicationController
     render :json => conversation.to_json(:methods => :name)
   end
 
-
+  def delete
+    Conversation.between(@user, User.find(params[:id])).first.destroy
+  end
 
   def get_messages
     # :id is the id of the recipient

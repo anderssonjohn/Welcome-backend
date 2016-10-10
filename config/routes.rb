@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'conversations' => 'conversations#get'
 
+  get 'delete/:id' => 'conversations#delete'
+
   # :id is the id of the recipient
   get 'conversations/:id/messages' => 'conversations#get_messages'
 
