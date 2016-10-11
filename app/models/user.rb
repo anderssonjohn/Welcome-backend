@@ -9,7 +9,7 @@ class User < ApplicationRecord
   end
 
   scope :same_job, -> (user) do
-    where("conversations.sender_id =? OR conversations.recipient_id =?",user.id,user.id)
+    where("users.profession =?",user.profession)
   end
 
   private

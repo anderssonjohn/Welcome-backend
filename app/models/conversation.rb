@@ -9,10 +9,6 @@ class Conversation < ActiveRecord::Base
     user.name
   end
 
-  # def recipient_id(user)
-  #   user.id
-  # end
-
   validates_uniqueness_of :sender_id, :scope => :recipient_id
 
   scope :involving, -> (user) do
