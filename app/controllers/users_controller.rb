@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate, only: :show
+  before_action :authenticate, only: [:show, :update_profession]
 
   def show
     render :json => @user
@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     else
       render status: 406
     end
+  end
+
+  def update_profession
+    @user.profession = params[:profession]
+    @user.save!
+    render status: :ok
   end
 
   # protected

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   post 'messages' => 'messages#create'
 
+  post 'update_profession' => 'users#update_profession'
+
   # resources :conversations do
   #   resources :messages
   # end
